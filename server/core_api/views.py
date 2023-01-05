@@ -11,20 +11,17 @@ class LoginManager(APIView):
         serializer = self.serializer_class(data=request.data)
 
         if serializer.is_valid():
-            passportNo = serializer.data.get("passportNo")
             bookingNo = serializer.data.get("bookingNo")
 
             try:
-                user = User.objects.get(passportNo=passportNo)
-                if user.bookingNo == bookingNo:
-                    baggages = Baggage.objects.filter(owner=user)
-                    error = "error_OK"
-                    return Response({   "error": error,
-                                        "payload": baggages})
-                
-                else:
-                    error = "error_incorrect_credentials"
-                    return Response({"error": error})
+                user = User.objects.get(bookingNo=bookingNo)
+                baggages = Baggage.objects.filter(owner=user).values()
+                baggages = [entry for entry in baggages]
+
+                print(type(baggages))
+                error = "error_OK"
+                return Response({   "error": error,
+                                    "payload": baggages})
 
             except:
                 error = "error_user_not_found"
@@ -44,10 +41,7 @@ class StatusUpdateMagaer(APIView):
             try:
                 baggage = Baggage.objects.get(serialID=serialID)
                 baggage.status = status
-                if status == "claimed":
-                    baggage.delete()
-                else:
-                    baggage.save()
+                baggage.save()
                 error = "error_OK"
                 return Response({"error": error})
             
@@ -63,17 +57,40 @@ class CheckInManager(APIView):
 
         if serializer.is_valid():
             name = serializer.data.get("name")
-            status = serializer.data.get("status")
             passportNo = serializer.data.get("passportNo")
             bookingNo = serializer.data.get("bookingNo")
-            serialID = serializer.data.get("serialID")
+            checkInExtended = dict(serializer.data.get("checkInExtended"))
 
-            user = User(name=name, passportNo=passportNo, bookingNo=bookingNo)
-            user.save()
-            baggage = Baggage(serialID=serialID, owner=user, status=status)
+            try:
+                user = User.objects.get(name=name, passportNo=passportNo)
+            except:
+                user = User(name=name, passportNo=passportNo, bookingNo=bookingNo)
+                user.save()
+
+            baggage = Baggage(serialID=checkInExtended['serialID'], owner=user, status=checkInExtended['status'])
             baggage.save()
 
             error = "error_OK"
             return Response({"error": error})
 
 
+class BeltUpdateManager(APIView):
+    serializer_class = BeltUpdateSerializer
+
+    def post(self, request):
+        serializer = self.serializer_class(data=request.data)
+
+        if serializer.is_valid():
+            belt = serializer.data.get("belt")
+            serialID = serializer.data.get("serialID")
+
+            try:
+                bag = Baggage.objects.get(serialID=serialID)
+                bag.belt = belt
+                bag.save()
+                error = "error_OK"
+                return Response({"error": error})
+
+            except:
+                error = "error_bag_not_found"
+                return Response({"error": error})

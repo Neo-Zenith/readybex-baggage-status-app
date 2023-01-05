@@ -1,0 +1,99 @@
+.home-navbar {
+    height: 12rem;
+    width: 100%;
+    background-color: var(--color-secondary-light-purple);
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.home-logo {
+    display: flex;
+    color: black;
+    margin-left: 5rem;
+    width: 35%;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.home-logo img {
+    width: 10rem;
+}
+
+.home-content {
+    background-color: var(--color-secondary-light-purple);
+    height: 80rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.home-search-bar {
+    height: 15%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.home-search-bar form input {
+    background-color: transparent;
+    border: none;
+    font: 400 2.5rem 'Lato';
+    border-radius: 2.5rem;
+    padding: 0.25rem 1rem;
+    border: 0.2rem solid var(--color-secondary-dark-purple);
+}
+
+.home-search-bar form button {
+    background-color: transparent;
+    border: none;
+    font-size: 2.5rem;
+    margin-left: 1.5rem;
+    color: var(--color-secondary-dark-purple);
+}
+
+.home-payload {
+    height: 85%;
+    margin: 5% 12%;
+    width: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.breaker-line {
+    width: 95%;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.payload-entries,
+.payload-title {
+    width: 100%;
+    height: 10%;
+    justify-content: flex-start;
+}
+
+.payload-entry-list,
+.payload-title ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+}
+
+.payload-entry-list li,
+.payload-title ul li {
+    width: 33%;
+    list-style: none;
+    font: 600 2.5rem 'Lato';
+    text-align: start;
+}
+
+.payload-entry-list li {
+    font: 400 2rem 'Lato';
+}
+
+.payload-error {
+    height: 35%;
+    text-align: center;
+    font: 400 2.5rem 'Lato';
+}

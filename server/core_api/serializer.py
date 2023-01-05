@@ -5,20 +5,20 @@ from .models import User, Baggage
 class LoginSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('passportNo', 'bookingNo')
+        fields = ['bookingNo']
 
 class StatusUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Baggage
         fields = ('serialID', 'status')
 
-class CheckInExtendedSerializer(serializers.ModelSerializer):
+class BeltUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Baggage
-        fields = ('serialID', 'status')
+        fields =['belt', 'serialID']
 
 class CheckInSerializer(serializers.ModelSerializer):
-    checkInExtended = CheckInExtendedSerializer()
+    checkInExtended = StatusUpdateSerializer()
 
     class Meta:
         model = User
