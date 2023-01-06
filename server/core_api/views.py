@@ -49,7 +49,7 @@ class StatusUpdateMagaer(APIView):
 
                 if status == "Landed" or status == "Arrived":
                     baggage.belt = 7
-                    
+
                 baggage.save()
                 error = "error_OK"
                 return Response({"error": error})
@@ -80,12 +80,18 @@ class CheckInManager(APIView):
 
             try:
                 baggage = Baggage.objects.get(serialID=serialID)
+                baggage.status = status
+                error = "error_bag_checked_in"
+
+                return Response({"error": error})
+  
             except:
                 baggage = Baggage(serialID=serialID, owner=user, status=status, airline=airline)
                 baggage.save()
+                error = "error_OK"
 
-            error = "error_OK"
-            return Response({"error": error})
+                return Response({"error": error})
+
         else:
             print(serializer.data)
 

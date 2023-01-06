@@ -19,13 +19,12 @@ with placeholder.form(key='Kiosk Form', clear_on_submit=True):
     submit = st.form_submit_button("Submit")
 
 if submit:
-    html_string = """
-    <p1> Please scan the RFID tag to register. </p>
-    """
-    instruction = st.markdown(html_string, unsafe_allow_html=True)
+    instruction = st.warning('Please scan the RFID tag to register.', icon="⚠️")
+    animation = st.image("https://www.thermaltransfersolutions.com/wp-content/uploads/2019/06/RFID_as_gif.gif", width=150)
     if baggagecheckin.main(name, passport_no):
         instruction.empty()
         placeholder.empty()
+        animation.empty()
         title.empty()
 
         title_string = """
@@ -33,11 +32,15 @@ if submit:
         title = st.markdown(title_string, unsafe_allow_html=True)
 
         html_string = """
-        <p style="font-size:18px;"> Baggage has been registered! You may use the following QR code to check the status of your bag! </p>
         <img width="350px" src="https://user-images.githubusercontent.com/77436548/211039550-047d4928-2383-405a-9e07-7a59dcc3b6b4.png" />
         """
+        st.success("Baggage has been registered! You may use the following QR code to check the status of your bag!", icon="✅")
         st.markdown(html_string, unsafe_allow_html=True)
         exitButton = st.button("Exit")
 
         if exitButton:
             exit()
+    else:
+        instruction.empty()
+        animation.empty()
+        st.error('Baggage has already been checked in!', icon="🚨")

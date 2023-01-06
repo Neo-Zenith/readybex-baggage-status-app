@@ -1,6 +1,7 @@
 import serial
 import time
 import requests
+import ast
 
 def formatData(data):
 	data = "".join(data.split())
@@ -32,15 +33,18 @@ def checkInAPI(name, passportNo, bookingNo, status, airline, serialID):
   
 	r = requests.post(url = URL, headers = headers, json = data)
 	if r.status_code == 200:
-		return True
+		response = ast.literal_eval(r.text)
+		if response["error"] ==  "error_OK":
+			return True
+		else:
+			return False
 	else:
-		print("hit")
 		return False
 
 
 def main(name, passportNo):
 	connectionSuccess = 0
-	port = 'COM6' #CHANGE THIS TO THE SERIAL PORT THAT THE ARDUINO IS CONNECTED TO
+	port = 'COM7' #CHANGE THIS TO THE SERIAL PORT THAT THE ARDUINO IS CONNECTED TO
 	try:
 		print ("Trying to connect to", port+"...") 
 		arduino = serial.Serial(port, 9600, timeout = 10) 
