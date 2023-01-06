@@ -17,10 +17,15 @@ class LoginManager(APIView):
                 user = User.objects.get(bookingNo=bookingNo)
                 baggages = Baggage.objects.filter(owner=user).values()
                 baggages = [entry for entry in baggages]
+                baggages = sorted(baggages, key=lambda d: d['serialID']) 
 
-                print(type(baggages))
                 error = "error_OK"
+                metadata = {
+                    "name": user.name,
+                    "passportNo": user.passportNo
+                }
                 return Response({   "error": error,
+                                    "metadata": metadata,
                                     "payload": baggages})
 
             except:
@@ -56,10 +61,13 @@ class CheckInManager(APIView):
         serializer = self.serializer_class(data=request.data)
 
         if serializer.is_valid():
+            print()
             name = serializer.data.get("name")
             passportNo = serializer.data.get("passportNo")
             bookingNo = serializer.data.get("bookingNo")
-            checkInExtended = dict(serializer.data.get("checkInExtended"))
+            serialID = serializer.data.get("checkInExtended")['serialID']
+            status = serializer.data.get("checkInExtended")['status']
+            airline = serializer.data.get("checkInExtended")['airline']
 
             try:
                 user = User.objects.get(name=name, passportNo=passportNo)
@@ -67,12 +75,13 @@ class CheckInManager(APIView):
                 user = User(name=name, passportNo=passportNo, bookingNo=bookingNo)
                 user.save()
 
-            baggage = Baggage(serialID=checkInExtended['serialID'], owner=user, status=checkInExtended['status'])
+            baggage = Baggage(serialID=serialID, owner=user, status=status, airline=airline)
             baggage.save()
 
             error = "error_OK"
             return Response({"error": error})
-
+        else:
+            print(serializer.data)
 
 class BeltUpdateManager(APIView):
     serializer_class = BeltUpdateSerializer

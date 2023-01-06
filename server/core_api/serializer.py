@@ -15,12 +15,18 @@ class StatusUpdateSerializer(serializers.ModelSerializer):
 class BeltUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Baggage
-        fields =['belt', 'serialID']
+        fields = ['belt', 'serialID']
+
+
+class CheckInExtendedSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Baggage
+        fields = ['serialID', 'status', 'airline']
 
 class CheckInSerializer(serializers.ModelSerializer):
-    checkInExtended = StatusUpdateSerializer()
 
+    checkInExtended = CheckInExtendedSerializer(required=True)
     class Meta:
         model = User
-        fields = ('name', 'passportNo', 'bookingNo', 'checkInExtended')
+        fields = "__all__"
 

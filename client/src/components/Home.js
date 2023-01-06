@@ -12,13 +12,13 @@ export default function Home() {
     ]);
 
     const [bookingNo, setBookingNo] = useState("");
+    const [name, setName] = useState("");
+    const [passportNo, setPassportNo] = useState("");
     const [error, setError] = useState(null);
-    const [cache, setCache] = useState("");
-    const [skipCount, setSkipCount] = useState(true);
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        setCache(bookingNo);
+        request();
     };
 
     const request = () => {
@@ -29,7 +29,7 @@ export default function Home() {
                 Accept: "application/json",
             },
             body: JSON.stringify({
-                bookingNo: cache,
+                bookingNo: bookingNo,
             }),
         };
 
@@ -41,13 +41,10 @@ export default function Home() {
                 console.log(json);
                 setError(json.error);
                 setBaggages(json.payload);
+                setName(json.metadata.name);
+                setPassportNo(json.metadata.passportNo);
             });
     };
-
-    useEffect(() => {
-        if (skipCount) setSkipCount(false);
-        if (!skipCount) request();
-    }, [cache]);
 
     return (
         <>
@@ -70,13 +67,24 @@ export default function Home() {
                         </button>
                     </form>
                 </div>
+                <div className="home-metadata">
+                    <ul>
+                        <li>Passport No: </li>
+                        <li id="passportNo">{passportNo}</li>
+                    </ul>
+                    <ul>
+                        <li>Name: </li>
+                        <li id="name">{name}</li>
+                    </ul>
+                </div>
                 <div className="home-payload">
                     <hr className="breaker-line" />
                     <div className="payload-title">
                         <ul>
-                            <li>Serial ID</li>
-                            <li>Status</li>
+                            <li>ID</li>
+                            <li id="status-title">Status</li>
                             <li>Belt</li>
+                            <li>Airline</li>
                         </ul>
                     </div>
                     <hr className="breaker-line" />
@@ -89,16 +97,28 @@ export default function Home() {
                                     key={baggage.serialID}
                                 >
                                     <li>{baggage.serialID}</li>
-                                    <li>{baggage.status}</li>
+                                    <li
+                                        id="status-list"
+                                        className={
+                                            baggage.status == "Ready for claim"
+                                                ? "ready"
+                                                : "processing"
+                                        }
+                                    >
+                                        {baggage.status}
+                                    </li>
                                     <li>
-                                        {baggage.status !=
-                                            "Arrived at destination airport" && (
-                                            <div>NIL</div>
-                                        )}
-                                        {baggage.status ==
-                                            "Arrived at destination airport" &&
+                                        {baggage.status != "Arrived" &&
+                                            baggage.status !=
+                                                "Ready for claim" && (
+                                                <div>NIL</div>
+                                            )}
+                                        {(baggage.status == "Arrived" ||
+                                            baggage.status ==
+                                                "Ready for claim") &&
                                             baggage.belt}
                                     </li>
+                                    <li>{baggage.airline}</li>
                                 </ul>
                             ))}
                         {error == "error_user_not_found" && (

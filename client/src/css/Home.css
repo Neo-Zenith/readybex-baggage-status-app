@@ -28,6 +28,27 @@
     flex-direction: column;
 }
 
+.home-metadata {
+    height: 15%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.home-metadata ul {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    margin: 0% 12%;
+    align-items: flex-end;
+}
+
+.home-metadata ul li {
+    list-style: none;
+    width: 20rem;
+    font: 400 2.1rem 'Lato';
+}
+
 .home-search-bar {
     height: 15%;
     width: 100%;
@@ -41,7 +62,7 @@
     border: none;
     font: 400 2.5rem 'Lato';
     border-radius: 2.5rem;
-    padding: 0.25rem 1rem;
+    padding: 0.25rem 1.5rem;
     border: 0.2rem solid var(--color-secondary-dark-purple);
 }
 
@@ -54,8 +75,8 @@
 }
 
 .home-payload {
-    height: 85%;
-    margin: 5% 12%;
+    height: 70%;
+    margin: 3% 12%;
     width: auto;
     display: flex;
     flex-direction: column;
@@ -96,4 +117,62 @@
     height: 35%;
     text-align: center;
     font: 400 2.5rem 'Lato';
+}
+
+#status-list,
+#status-title {
+    width: 60%;
+}
+
+.processing {
+    color: orange;
+}
+
+.ready {
+    color: green;
+}
+
+#name, #passportNo {
+    font-weight: 700;
+    letter-spacing: 0.15rem;
+}
+
+@media screen and (max-width: 768px) {
+    .home-metadata {
+        height: 4rem;
+    }
+
+    .home-metadata ul {
+        margin: 0% 3%;
+    }
+    
+    .home-metadata ul li {
+        font-size: 1.8rem;
+    }
+
+    .home-search-bar {
+        height: 10%;
+    }
+
+    .home-search-bar form input,
+    .home-search-bar form button {
+        font-size: 1.8rem;
+    }
+
+    .home-payload {
+        margin: 3%;
+    }
+
+    .payload-title {
+        height: 8%;
+    }
+
+    .payload-entry-list li,
+    .payload-title ul li {
+        font: 600 1.7rem 'Lato';
+    }
+
+    .payload-entry-list li {
+        font: 400 1.5rem 'Lato';
+    }
 }
