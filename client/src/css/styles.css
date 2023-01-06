@@ -21,14 +21,11 @@
 
 
 :root {
-    --color-primary-dark-purple: #3a1150;
-    --color-secondary-dark-purple: #805d94;
-    --color-tertiary-dark-purple: #a087ac;
+    --color-primary-blue: #1d5b94;
+    --color-secondary-blue: #8ac0eb;
+    --color-tertiary-blue: #b8e7f9;
 
-    --color-primary-light-purple: #bcacbc;
-    --color-secondary-light-purple: #fae3fb;
-
-    --color-white: #FDFBFF;
+    --color-white: #ecf5fb;
 
     font-size: 62.5%;
 }

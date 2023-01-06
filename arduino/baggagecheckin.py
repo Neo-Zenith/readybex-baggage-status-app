@@ -34,6 +34,7 @@ def checkInAPI(name, passportNo, bookingNo, status, airline, serialID):
 	if r.status_code == 200:
 		return True
 	else:
+		print("hit")
 		return False
 
 

@@ -46,6 +46,10 @@ class StatusUpdateMagaer(APIView):
             try:
                 baggage = Baggage.objects.get(serialID=serialID)
                 baggage.status = status
+
+                if status == "Landed" or status == "Arrived":
+                    baggage.belt = 7
+                    
                 baggage.save()
                 error = "error_OK"
                 return Response({"error": error})

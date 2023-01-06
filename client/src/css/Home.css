@@ -1,7 +1,7 @@
 .home-navbar {
     height: 12rem;
     width: 100%;
-    background-color: var(--color-secondary-light-purple);
+    background-color: var(--color-white);
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -21,7 +21,7 @@
 }
 
 .home-content {
-    background-color: var(--color-secondary-light-purple);
+    background-color: var(--color-white);
     height: 80rem;
     width: 100%;
     display: flex;
@@ -63,7 +63,7 @@
     font: 400 2.5rem 'Lato';
     border-radius: 2.5rem;
     padding: 0.25rem 1.5rem;
-    border: 0.2rem solid var(--color-secondary-dark-purple);
+    border: 0.2rem solid var(--color-secondary-blue);
 }
 
 .home-search-bar form button {
@@ -71,7 +71,7 @@
     border: none;
     font-size: 2.5rem;
     margin-left: 1.5rem;
-    color: var(--color-secondary-dark-purple);
+    color: var(--color-secondary-blue);
 }
 
 .home-payload {

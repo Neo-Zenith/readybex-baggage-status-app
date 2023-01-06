@@ -41,14 +41,13 @@ def main(status):
 				if (formattedData == "*"):
 					sID = readAndFormat(arduino)
 					print(sID, status)
-					if statusUpdateAPI(sID, status):
-						return True
+					statusUpdateAPI(sID, status)
 
 			except Exception as e:
 				print (e)
 
 
-main("Checked in")
+##main("Checked in")
 ##main("Departed")
-##main("Landed")
+main("Landed")
 ##main("Arrived")

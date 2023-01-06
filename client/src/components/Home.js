@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import logo from "../static/logo.jpeg";
+import logo from "../static/logo.gif";
 import "../css/Home.css";
 
 export default function Home() {
