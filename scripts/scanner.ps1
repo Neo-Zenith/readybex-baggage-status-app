@@ -1,0 +1,1 @@
+python ../arduino/baggageStatusUpdate.py

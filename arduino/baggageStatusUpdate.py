@@ -10,8 +10,7 @@ def statusUpdateAPI(serialID, status):
                 "Accept": "application/json"}
 
     data = {'serialID': serialID,
-            'status': status
-			}
+            'status': status}
     
     r = requests.post(url = URL, headers = headers, json = data)
     if r.status_code == 200:
@@ -41,7 +40,7 @@ def main(status):
 				formattedData = readAndFormat(arduino)
 				if (formattedData == "*"):
 					sID = readAndFormat(arduino)
-					status = status
+					print(sID, status)
 					if statusUpdateAPI(sID, status):
 						return True
 
@@ -49,7 +48,7 @@ def main(status):
 				print (e)
 
 
-##main("Checked In")
+main("Checked in")
 ##main("Departed")
-main("Arrived")
-##main("Ready for Claim")
+##main("Landed")
+##main("Arrived")

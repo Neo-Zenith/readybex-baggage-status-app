@@ -119,9 +119,11 @@
     font: 400 2.5rem 'Lato';
 }
 
+#ID-title,
+#ID-list,
 #status-list,
 #status-title {
-    width: 60%;
+    width: 45%;
 }
 
 .processing {
@@ -173,6 +175,10 @@
     }
 
     .payload-entry-list li {
-        font: 400 1.5rem 'Lato';
+        font: 400 1.3rem 'Lato';
+    }
+
+    .payload-error {
+        font-size: 1.8rem;
     }
 }

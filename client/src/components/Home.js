@@ -41,8 +41,14 @@ export default function Home() {
                 console.log(json);
                 setError(json.error);
                 setBaggages(json.payload);
-                setName(json.metadata.name);
-                setPassportNo(json.metadata.passportNo);
+
+                if (json.error != "error_user_not_found") {
+                    setName(json.metadata.name);
+                    setPassportNo(json.metadata.passportNo);
+                } else {
+                    setName("");
+                    setPassportNo("");
+                }
             });
     };
 
@@ -81,7 +87,7 @@ export default function Home() {
                     <hr className="breaker-line" />
                     <div className="payload-title">
                         <ul>
-                            <li>ID</li>
+                            <li id="ID-title">ID</li>
                             <li id="status-title">Status</li>
                             <li>Belt</li>
                             <li>Airline</li>
@@ -96,11 +102,11 @@ export default function Home() {
                                     className="payload-entry-list"
                                     key={baggage.serialID}
                                 >
-                                    <li>{baggage.serialID}</li>
+                                    <li id="ID-list">{baggage.serialID}</li>
                                     <li
                                         id="status-list"
                                         className={
-                                            baggage.status == "Ready for claim"
+                                            baggage.status == "Arrived"
                                                 ? "ready"
                                                 : "processing"
                                         }
@@ -108,14 +114,12 @@ export default function Home() {
                                         {baggage.status}
                                     </li>
                                     <li>
-                                        {baggage.status != "Arrived" &&
-                                            baggage.status !=
-                                                "Ready for claim" && (
+                                        {baggage.status != "Landed" &&
+                                            baggage.status != "Arrived" && (
                                                 <div>NIL</div>
                                             )}
-                                        {(baggage.status == "Arrived" ||
-                                            baggage.status ==
-                                                "Ready for claim") &&
+                                        {(baggage.status == "Landed" ||
+                                            baggage.status == "Arrived") &&
                                             baggage.belt}
                                     </li>
                                     <li>{baggage.airline}</li>

@@ -61,7 +61,6 @@ class CheckInManager(APIView):
         serializer = self.serializer_class(data=request.data)
 
         if serializer.is_valid():
-            print()
             name = serializer.data.get("name")
             passportNo = serializer.data.get("passportNo")
             bookingNo = serializer.data.get("bookingNo")
@@ -75,8 +74,11 @@ class CheckInManager(APIView):
                 user = User(name=name, passportNo=passportNo, bookingNo=bookingNo)
                 user.save()
 
-            baggage = Baggage(serialID=serialID, owner=user, status=status, airline=airline)
-            baggage.save()
+            try:
+                baggage = Baggage.objects.get(serialID=serialID)
+            except:
+                baggage = Baggage(serialID=serialID, owner=user, status=status, airline=airline)
+                baggage.save()
 
             error = "error_OK"
             return Response({"error": error})
