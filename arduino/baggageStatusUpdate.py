@@ -49,5 +49,5 @@ def main(status):
 
 ##main("Checked in")
 ##main("Departed")
-main("Landed")
-##main("Arrived")
+##main("Landed")
+main("Arrived")

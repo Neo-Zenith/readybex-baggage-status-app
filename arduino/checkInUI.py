@@ -34,7 +34,7 @@ if submit:
 
         html_string = """
         <p style="font-size:18px;"> Baggage has been registered! You may use the following QR code to check the status of your bag! </p>
-        <img width="350px" src="https://user-images.githubusercontent.com/77436548/211017791-556300da-f4d2-4801-b824-baa482e455d3.png" />
+        <img width="350px" src="https://user-images.githubusercontent.com/77436548/211039550-047d4928-2383-405a-9e07-7a59dcc3b6b4.png" />
         """
         st.markdown(html_string, unsafe_allow_html=True)
         exitButton = st.button("Exit")
