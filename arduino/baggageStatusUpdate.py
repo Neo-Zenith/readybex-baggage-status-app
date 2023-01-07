@@ -47,7 +47,7 @@ def main(status):
 				print (e)
 
 
-# main("Checked in")
+#main("Checked in")	
 # main("Departed")
 #main("Landed")
 main("Arrived")
