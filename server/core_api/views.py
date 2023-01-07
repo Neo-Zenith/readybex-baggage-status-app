@@ -14,7 +14,7 @@ class LoginManager(APIView):
             bookingNo = serializer.data.get("bookingNo")
 
             try:
-                user = User.objects.get(bookingNo=bookingNo)
+                user = User.objects.filter(bookingNo=bookingNo)[0]
                 baggages = Baggage.objects.filter(owner=user).values()
                 baggages = [entry for entry in baggages]
                 baggages = sorted(baggages, key=lambda d: d['serialID']) 
@@ -47,6 +47,7 @@ class StatusUpdateMagaer(APIView):
                 baggage = Baggage.objects.get(serialID=serialID)
                 baggage.status = status
 
+                # Remove this section for future development on belt notification
                 if status == "Landed" or status == "Arrived":
                     baggage.belt = 7
 

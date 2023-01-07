@@ -18,12 +18,14 @@ with placeholder.form(key='Kiosk Form', clear_on_submit=True):
     passport_no = st.text_input("Passport Number: ")
     submit = st.form_submit_button("Submit")
 
+placeholder2 = st.empty()
 if submit:
     instruction = st.warning('Please scan the RFID tag to register.', icon="⚠️")
     animation = st.image("https://www.thermaltransfersolutions.com/wp-content/uploads/2019/06/RFID_as_gif.gif", width=150)
     if baggagecheckin.main(name, passport_no):
         instruction.empty()
         placeholder.empty()
+        placeholder2.empty()
         animation.empty()
         title.empty()
 
@@ -43,4 +45,4 @@ if submit:
     else:
         instruction.empty()
         animation.empty()
-        st.error('Baggage has already been checked in!', icon="🚨")
+        placeholder = st.error('RFID tag has already been registered!', icon="🚨")

@@ -69,6 +69,8 @@ def main(name, passportNo):
 					print(bookingNo, flightNo, sID)
 					if checkInAPI(name, passportNo, bookingNo, status, flightNo, sID):
 						return True
+					else:
+						return False
 
 			except Exception as e:
 				print (e)
